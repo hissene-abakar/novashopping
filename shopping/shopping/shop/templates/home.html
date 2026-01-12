@@ -56,7 +56,7 @@
                     
                     <hr>
 
-                    <h6 class="card-subtitle mb-2 text-muted text-center" style="font-size: 0.9rem;">Sous-catégories :</h6>
+                    <h6 class="card-subtitle mb-2 text-muted text-center" style="font-size: 0.9rem;">alt kategori :</h6>
                     <div class="d-flex flex-wrap justify-content-center gap-2">
                         {% if category.altkategoriler.all %}
                             {% for sub in category.altkategoriler.all %}
@@ -65,7 +65,7 @@
                                 </span>
                             {% endfor %}
                         {% else %}
-                            <small class="text-muted text-center w-100">Aucune sous-catégorie</small>
+                            <small class="text-muted text-center w-100">alt kategori yok</small>
                         {% endif %}
                     </div>
                 </div>
