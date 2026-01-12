@@ -13,10 +13,10 @@ def register_view(request):
         email=request.POST.get("email")
 
         if password!=password2:
-            messages.warning(request,"votres mot de passe est incorrect!")
+            messages.warning(request,"sifreniz yanlis!")
             return render(request,"register.html")
         if User.objects.filter(username=username).exists():
-            messages.warning(request,"cet utilisateur existe deja! ")
+            messages.warning(request,"bu kullanci zaten var! ")
             return render(request,"register.html")
         newuser=User.objects.create_user(
             username=username,
