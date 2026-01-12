@@ -6,10 +6,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&m)lg+zz@n2%uyc_kkxv7bog9q7$f!jp^fyz#onf9w4bt#!p6c'
 
 DEBUG = True
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
+    'category',
     'accounts',
     'shop',
     'shopping',
@@ -36,7 +39,7 @@ ROOT_URLCONF = 'shopping.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

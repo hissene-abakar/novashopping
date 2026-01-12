@@ -1,129 +1,77 @@
 {% extends "base.html" %}
+
 {% block content %}
 
-<h2 class="mb-5 text-center">
-    <i class="fas fa-th-large"></i> Tum kategorilerimiz
-</h2>
+<style>
+    .category-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .category-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
+    }
+</style>
 
+<div class="container my-5">
 
-<div class="category-section mb-5">
-    <h4 class="category-title">
-        <i class="fas fa-laptop"></i> Électronik
-    </h4>
-    
-    <div class="row">
-        <div class="col-md-3">
-            <div class="product-card">
-                <img src="https://reimg-teknosa-cloud-prod.mncdn.com/mnresize/600/600/productimage/786328156/786328156_0_MC/15d3a8d73e8347ed9037ea9a02d3abe3.jpg" alt="HP Elitebook">
-                <p><strong>HP Elitebook</strong></p>
-                <span class="badge-price">434$</span>
-            </div>
-        </div>
-        
-        <div class="col-md-3">
-            <div class="product-card">
-                <img src="https://reimg-teknosa-cloud-prod.mncdn.com/mnresize/600/600/productimage/786337814/786337814_0_MC/6a54dd80bf1b4f978563a8cdea980a37.png" alt="HP Monster">
-                <p><strong>HP Monster</strong></p>
-                <span class="badge-price">566$</span>
-            </div>
-        </div>
-        
-        <div class="col-md-3">
-            <div class="product-card">
-                <img src="https://scr.wfcdn.de/25124/Apple-MacBook-Air-M2-1662464608-0-0.jpg" alt="MacBook Air">
-                <p><strong>MacBook Air Pro</strong></p>
-                <span class="badge-price">456$</span>
-            </div>
-        </div>
-        
-        <div class="col-md-3">
-            <div class="product-card">
-                <img src="https://www.notebookcheck.net/fileadmin/Notebooks/Apple/MacBook_Air_M2_Entry/IMG_5411.JPG" alt="MacBook Plus">
-                <p><strong>MacBook Air Plus</strong></p>
-                <span class="badge-price">632$</span>
-            </div>
-        </div>
+    <div class="text-center mb-5">
+        <h2 class="fw-bold text-uppercase position-relative d-inline-block">
+            Toutes nos catégories
+            <span style="display:block; height:3px; width:50px; background-color:#764ba2; margin: 10px auto 0;"></span>
+        </h2>
     </div>
-</div>
 
-<div class="category-section mb-5">
-    <h4 class="category-title">
-        <i class="fas fa-spray-can"></i> Urun
-    </h4>
-    
-    <div class="row">
-        <div class="col-md-3">
-            <div class="product-card">
-                <img src="https://astucesdegrandmere.net/wp-content/uploads/2018/12/produit-vaisselle.png" alt="Vaisselle">
-                <p><strong>Liquide Vaisselle</strong></p>
-                <span class="badge-price">34$</span>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+        {% for category in categories %}
+        <div class="col">
+            <div class="card h-100 border-0 shadow-sm category-card">
+
+                <div style="height: 200px; overflow: hidden; border-top-left-radius: 0.375rem; border-top-right-radius: 0.375rem;">
+                    {% if category.category_image %}
+                        <img src="{{ category.category_image.url }}" 
+                             alt="{{ category.category_name }}" 
+                             class="card-img-top w-100 h-100" 
+                             style="object-fit: cover;">
+                    {% else %}
+                        <div class="d-flex align-items-center justify-content-center h-100 bg-light text-muted">
+                            <i class="fas fa-image fa-3x"></i>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="card-body d-flex flex-column">
+                    <h4 class="card-title text-center fw-bold">{{ category.category_name }}</h4>
+                    
+                    <hr class="my-3">
+
+                    <div class="mt-auto">
+                        <h6 class="text-muted text-center mb-3" style="font-size: 0.9rem;">Sous-catégories :</h6>
+                        
+                        <div class="d-flex flex-wrap justify-content-center gap-2">
+                            {% if category.altkategoriler.all %}
+                                {% for sub in category.altkategoriler.all %}
+                                    <span class="badge rounded-pill bg-light text-dark border">
+                                        {{ sub.category_name }}
+                                    </span>
+                                {% endfor %}
+                            {% else %}
+                                <small class="text-muted fst-italic">Aucune sous-catégorie</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="card-footer bg-transparent border-0 text-center pb-4 pt-0">
+                    <a href="#" class="btn btn-primary btn-sm rounded-pill px-4 shadow-sm" style="background-color: #764ba2; border:none;">
+                        Explorer
+                    </a>
+                </div> -->
+
             </div>
         </div>
+        {% endfor %}
 
-        <div class="col-md-3">
-            <div class="product-card">
-                <img src="https://i.pinimg.com/236x/a4/5e/a8/a45ea8ec920ed46f3c56ade554c144d7.jpg" alt="Hair Product">
-                <p><strong>Produit Cheveux</strong></p>
-                <span class="badge-price">44$</span>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="product-card">
-                <img src="https://i.pinimg.com/originals/7b/87/d8/7b87d834779c785860bae6f91b1978f8.png" alt="Cosmétique">
-                <p><strong>Cosmétique</strong></p>
-                <span class="badge-price">45$</span>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="product-card">
-                <img src="https://i.pinimg.com/originals/e0/8f/28/e08f2881b353967cc5d8f8bd035f2c1f.png" alt="Hair Product Plus">
-                <p><strong>Produit Cheveux+</strong></p>
-                <span class="badge-price">43$</span>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="category-section mb-5">
-    <h4 class="category-title">
-        <i class="fas fa-tshirt"></i> Giyim
-    </h4>
-    
-    <div class="row">
-        <div class="col-md-3">
-            <div class="product-card">
-                <img src="https://www.foot-sport.com/cdn/shop/files/MAILLOT-REAL-MADRID-DOMICILE-2023-2024-MBAPPE-1.jpg?v=1717439587" alt="Real Madrid">
-                <p><strong>Maillot Real Madrid</strong></p>
-                <span class="badge-price">24$</span>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="product-card">
-                <img src="https://foot-star.com/wp-content/uploads/2024/08/Maillot-Barca-2024-2025-Domicile-Gavi.jpg" alt="Barcelona">
-                <p><strong>Maillot Barcelona</strong></p>
-                <span class="badge-price">22$</span>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="product-card">
-                <img src="https://blog.klekt.com/wp-content/uploads/2020/10/Supreme-x-Nike-Air-Max-Plus-TN-Feature-1.jpg" alt="Nike TN">
-                <p><strong>Nike Air Max TN</strong></p>
-                <span class="badge-price">134$</span>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="product-card">
-                <img src="https://8f08a8-ss.akinoncloudcdn.com/products/2024/06/03/28747972/f3b6c3e4-4ded-4da2-95b6-8d2a2d123c32_size1920x1920_cropCenter.jpg" alt="Survêtement">
-                <p><strong>Survêtement Nike</strong></p>
-                <span class="badge-price">88$</span>
-            </div>
-        </div>
     </div>
 </div>
 
